@@ -1,9 +1,10 @@
-from eurorack.glowlab import Power, Test
+from eurorack.glowlab import Power
 from eurorack.panels import Panel, PanelSize
 from typing import List
 import cadquery as cq
 
 from eurorack.part import Component
+from render import render_mesh
 
 
 def output(components: List[Component]):
@@ -12,6 +13,7 @@ def output(components: List[Component]):
         built = comp.build().val()
         built.exportStep(f"outputs/{comp.number}.step")
         cq.exporters.export(built, f"outputs/{comp.number}.stl")
+        render_mesh(f"outputs/{comp.number}.stl",f"outputs/{comp.number}.png")
 
 
 def build(components: List[Component]):
@@ -39,5 +41,7 @@ parts = [
 parts = [
     Power(),
 ]
+
+
 
 output(parts)
