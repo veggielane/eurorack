@@ -3,7 +3,7 @@ from numpy import uint
 
 class Component:
     def __init__(self, number: str, name: str, revision: uint = 1):
-        self.number = number
+        self.number = "ENGER-"+number
         self.name = name
         self.revision = revision
 
@@ -13,4 +13,4 @@ class Component:
 
 class Part(Component):
     def __init__(self, number: str, name: str):
-        super(Component, self).__init__(number, name)
+        super().__init__(number, name)
