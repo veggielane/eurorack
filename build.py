@@ -1,3 +1,6 @@
+import os
+if platform == "linux" or platform == "linux2":
+    os.environ['PYOPENGL_PLATFORM'] = 'osmesa'
 from eurorack.glowlab import Power
 from eurorack.panels import Panel, PanelSize
 from typing import List
@@ -5,7 +8,7 @@ import cadquery as cq
 from sys import platform
 from eurorack.part import Component
 from render import render_mesh
-import os
+
 
 
 def output(components: List[Component]):
@@ -44,8 +47,7 @@ parts = [
 ]
 
 
-if platform == "linux" or platform == "linux2":
-    os.environ['PYOPENGL_PLATFORM'] = 'osmesa'
+
 
 
 output(parts)
