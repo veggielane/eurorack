@@ -35,8 +35,4 @@ parts = [
     Panel(PanelSize.HP_42),
 ]
 
-if "show_object" in locals():
-    for key, value in build(parts).items():
-        show_object(value, name=key.number)
-else:
-    output(parts)
+output(parts)
