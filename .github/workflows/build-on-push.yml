@@ -10,19 +10,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install Mesa
-        run: | 
-          sudo apt update
-          sudo wget https://github.com/mmatl/travis_debs/raw/master/xenial/mesa_18.3.3-0.deb
-          sudo dpkg -i ./mesa_18.3.3-0.deb || true
-          sudo apt install -f
       - name: Setup
         uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: cadquery
           environment-file: ./environment/cadquery.yml
           python-version: 3.10.4
-      - name: RBuild
+      - name: Build
         shell: bash -l {0}
         run: |
           conda info
