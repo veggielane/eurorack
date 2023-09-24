@@ -7,3 +7,5 @@ dependencies:
   - python=3.10
   - pip
   - cadquery=master
+  - pip:
+    - git+https://github.com/gumyr/build123d
