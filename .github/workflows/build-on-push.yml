@@ -11,11 +11,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Anaconda
+      - name: Setup Environment
         uses: conda-incubator/setup-miniconda@v2
         with:
-          environment-file: environment_ci.yml
-          activate-environment: environment_ci
+          environment-file: environment.yml
+          activate-environment: environment
       - name: Build
         shell: bash -l {0}
         run: |
