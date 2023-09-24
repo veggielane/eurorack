@@ -19,7 +19,6 @@ jobs:
         with:
           activate-environment: cadquery
           environment-file: ./environment/cadquery.yml
-          python-version: 3.10.4
       - name: Build
         shell: bash -l {0}
         run: |
