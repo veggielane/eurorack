@@ -5,20 +5,17 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 5
+    defaults:
+      run:
+        shell: bash -l {0}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install Mesa
-        run: | 
-          sudo apt update
-          sudo apt install libgl1-mesa-glx
-      - name: Setup
-        uses: conda-incubator/setup-miniconda@v2
+      - name: Setup Anaconda
+        uses: conda-incubator/setup-miniconda@v2.1.1
         with:
-          activate-environment: cadquery
-          environment-file: ./environment/cadquery.yml
+          environment-file: environment_ci.yml
+          activate-environment: environment_ci
       - name: Build
         shell: bash -l {0}
         run: |
