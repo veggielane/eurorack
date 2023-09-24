@@ -1,0 +1,8 @@
+name: cadquery
+channels:
+  - cadquery
+  - conda-forge
+  - defaults
+dependencies:
+  - cadquery=master
+  - black

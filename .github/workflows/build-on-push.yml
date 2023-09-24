@@ -20,7 +20,7 @@ jobs:
         uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: cadquery
-          environment-file: ./env/cadquery.yml
+          environment-file: ./environment/cadquery.yml
           python-version: 3.10.4
       - name: RBuild
         shell: bash -l {0}

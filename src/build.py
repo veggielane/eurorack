@@ -39,4 +39,10 @@ result = (
 )
 
 built = result.val()
-built.exportStep(f"output/test.step")
+
+
+
+if "show_object" in locals():
+    show_object(built, name="preview")
+else:
+    built.exportStep(f"output/test.step")
