@@ -8,9 +8,18 @@ jobs:
     defaults:
       run:
         shell: bash -l {0}
+
+
+        
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Install Packages
+        run: | 
+          apt-get --allow-releaseinfo-change update
+          apt-get update -y
+          apt-get upgrade -y
+          apt-get install -y libgl1-mesa-glx libgl1-mesa-dev libglu1-mesa-dev  freeglut3-dev libosmesa6 libosmesa6-dev  libgles2-mesa-dev
       - name: Setup Anaconda
         uses: conda-incubator/setup-miniconda@v2.1.1
         with:
