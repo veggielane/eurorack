@@ -19,7 +19,7 @@ jobs:
       - name: Install Mesa
         run: | 
           sudo apt update
-          sudo apt install libgl1-mesa-glx
+          sudo apt install libgl1-mesa-glx freeglut3-dev
       - name: Build
         run: |
           conda info
