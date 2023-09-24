@@ -4,7 +4,6 @@ from typing import List
 import cadquery as cq
 from sys import platform
 from eurorack.part import Component
-from render import render_mesh
 
 
 
@@ -14,7 +13,7 @@ def output(components: List[Component]):
         built = comp.build().val()
         built.exportStep(f"outputs/{comp.number}.step")
         cq.exporters.export(built, f"outputs/{comp.number}.stl")
-        render_mesh(f"outputs/{comp.number}.stl",f"outputs/{comp.number}.png")
+        cq.exporters.export(built, f"outputs/{comp.number}.svg")
 
 
 def build(components: List[Component]):

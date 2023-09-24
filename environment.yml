@@ -7,7 +7,5 @@ dependencies:
   - python=3.10
   - pip
   - cadquery=master
-  - pyrender
   - pip:
-    - PyOpenGL=3.1.1a1
     - git+https://github.com/gumyr/build123d
