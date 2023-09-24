@@ -1,6 +1,3 @@
-import os
-if platform == "linux" or platform == "linux2":
-    os.environ['PYOPENGL_PLATFORM'] = 'osmesa'
 from eurorack.glowlab import Power
 from eurorack.panels import Panel, PanelSize
 from typing import List
