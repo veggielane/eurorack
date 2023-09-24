@@ -1,4 +1,4 @@
-from eurorack.glowlab import Power, Test
+from eurorack.glowlab import Power
 from eurorack.panels import Panel, PanelSize
 from typing import List
 import cadquery as cq
