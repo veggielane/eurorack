@@ -1,3 +1,4 @@
+from eurorack.glowlab import Test
 from eurorack.panels import Panel, PanelSize
 from typing import List
 import cadquery as cq
@@ -33,6 +34,10 @@ parts = [
     Panel(PanelSize.HP_22),
     Panel(PanelSize.HP_28),
     Panel(PanelSize.HP_42),
+]
+
+parts = [
+    Test(),
 ]
 
 output(parts)
