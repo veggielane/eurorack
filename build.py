@@ -1,9 +1,10 @@
-from eurorack.glowlab import Power
+from eurorack.glowlab import Power, TrafficLight
 from eurorack.panels import Panel, PanelSize
 from typing import List
 import cadquery as cq
 from sys import platform
 from eurorack.part import Component
+
 
 def output(components: List[Component]):
     for comp in components:
@@ -11,10 +12,12 @@ def output(components: List[Component]):
         built = comp.build().val()
         cq.exporters.export(built, f"outputs/{comp.number}.step")
         cq.exporters.export(built, f"outputs/{comp.number}.stl")
-        cq.exporters.export(built, f"outputs/{comp.number}.svg", opt=comp.render_options())
+        cq.exporters.export(
+            built, f"outputs/{comp.number}.svg", opt=comp.render_options()
+        )
         wp = cq.Workplane()
         wp.objects = [built]
-        cq.exporters.export(wp,f"outputs/{comp.number}.dxf")
+        cq.exporters.export(wp, f"outputs/{comp.number}.dxf")
 
 
 def build(components: List[Component]):
@@ -39,12 +42,7 @@ parts = [
     Panel(PanelSize.HP_42),
 ]
 
-parts = [
-    Power(),
-]
-
-
-
+parts = [Power(), TrafficLight()]
 
 
 output(parts)

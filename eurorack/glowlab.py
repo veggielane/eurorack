@@ -6,7 +6,10 @@ from eurorack.part import Part
 io_input_height = panel_height - 18
 io_output_height = 18
 io_pitch = 15
+
 io_jack_dia = 6.4
+# TODO double check arcade dia
+led_arcade_dia = 30
 
 
 class GlowLabPanel(Part):
@@ -47,4 +50,39 @@ class Power(GlowLabPanel):
         panel = self.add_io(panel, 2, 2)
         # Add SparkFun Switch COM-11310
         panel = panel.pushPoints([(self.h_center, self.v_center)]).hole(12.2)
+        return panel
+
+
+class Power(GlowLabPanel):
+    def __init__(self):
+        super().__init__(hp=PanelSize.HP_6, number=f"POWER", name=f'POWER PANEL"')
+
+    def build(self):
+        panel = panel_geometry(self.hp)
+        panel = self.add_io(panel, 2, 2)
+        # Add SparkFun Switch COM-11310
+
+        panel = panel.pushPoints([(self.h_center, self.v_center)]).hole(12.2)
+        return panel
+
+
+class TrafficLight(GlowLabPanel):
+    def __init__(self):
+        super().__init__(hp=PanelSize.HP_10, number=f"TRAFFIC", name=f'TRAFFIC LIGHTS"')
+
+    def build(self):
+        panel = panel_geometry(self.hp)
+        v_pos = self.v_center - 5
+        v_pitch = 35
+        panel = panel.pushPoints(
+            [
+                (self.h_center, v_pos - v_pitch),
+                (self.h_center, v_pos),
+                (self.h_center, v_pos + v_pitch),
+            ]
+        ).hole(led_arcade_dia)
+        panel = self.add_jacks(
+            panel,
+            [(7.5, io_input_height), (panel_width(self.hp) - 7.5, io_input_height)],
+        )
         return panel
