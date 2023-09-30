@@ -1,15 +1,9 @@
-from enum import Enum
 from eurorack.panels import PanelSize, panel_geometry, panel_width, panel_height
 from eurorack.part import Part
 
 
-io_input_height = panel_height - 18
-io_output_height = 18
-io_pitch = 15
-
 io_jack_dia = 6.4
-led_dia = 6.2
-
+led_dia = 6.4
 led_arcade_dia = 28
 
 
@@ -19,6 +13,12 @@ class GlowLabPanel(Part):
         self.h_center = panel_width(self.hp) / 2.0
         self.v_center = panel_height / 2.0
         self.v_third = panel_height / 3.0
+
+        self.io_pitch = 15
+
+        self.input_height = self.v_center + self.io_pitch * 3
+        self.output_height = self.v_center - self.io_pitch * 3
+
         super().__init__("GLOWLAB-" + number, name)
 
     def horizontal_spacing(self, height, number, pitch):
@@ -40,21 +40,21 @@ class GlowLabPanel(Part):
 
     def add_io(self, geo, inputs, outputs):
         points = []
-        points.extend(self.horizontal_spacing(io_input_height, inputs, io_pitch))
-        points.extend(self.horizontal_spacing(io_output_height, outputs, io_pitch))
+        points.extend(self.horizontal_spacing(self.input_height, inputs, self.io_pitch))
+        points.extend(
+            self.horizontal_spacing(self.output_height, outputs, self.io_pitch)
+        )
         return self.add_jacks(geo, points)
-        
+
     def render_options(self):
         return {
-            "width": panel_width(self.hp)*2.0,
+            "width": panel_width(self.hp) * 2.0,
             "height": 300,
             "marginLeft": 5,
             "marginTop": 5,
             "showAxes": True,
             "projectionDir": (0, 0, 1),
         }
-        
-
 
 
 class Power(GlowLabPanel):
@@ -99,14 +99,16 @@ class TrafficLight(GlowLabPanel):
         ).hole(led_arcade_dia)
         panel = self.add_jacks(
             panel,
-            [(7.5, io_input_height), (panel_width(self.hp) - 7.5, io_input_height)],
+            [(7.5, self.input_height), (panel_width(self.hp) - 7.5, self.input_height)],
         )
         return panel
 
 
 class Joystick(GlowLabPanel):
     def __init__(self):
-        super().__init__(hp=PanelSize.HP_12, number=f"JOYSTICK", name=f'JOYSTICK PANEL"')
+        super().__init__(
+            hp=PanelSize.HP_12, number=f"JOYSTICK", name=f'JOYSTICK PANEL"'
+        )
 
     def build(self):
         panel = panel_geometry(self.hp)
@@ -114,6 +116,52 @@ class Joystick(GlowLabPanel):
 
         # Add SparkFun Switch COM-11310
         panel = panel.pushPoints([(self.h_center, self.v_center)]).hole(22)
-        panel = panel.pushPoints([(self.h_center, self.v_center + 16),(self.h_center + 16, self.v_center),(self.h_center, self.v_center - 16),(self.h_center - 16, self.v_center)]).hole(4)
-        panel = self.add_leds(panel, self.horizontal_spacing(io_output_height + io_pitch, 4, io_pitch))
+        panel = panel.pushPoints(
+            [
+                (self.h_center, self.v_center + 16),
+                (self.h_center + 16, self.v_center),
+                (self.h_center, self.v_center - 16),
+                (self.h_center - 16, self.v_center),
+            ]
+        ).hole(4)
+        panel = self.add_leds(
+            panel,
+            self.horizontal_spacing(
+                self.output_height + self.io_pitch, 4, self.io_pitch
+            ),
+        )
+        return panel
+
+
+class Matrix(GlowLabPanel):
+    def __init__(self):
+        super().__init__(hp=PanelSize.HP_12, number=f"MATRIX", name=f'MATRIX PANEL"')
+
+    def build(self):
+        panel = panel_geometry(self.hp)
+        panel = self.add_io(panel, 4, 4)
+
+        panel = self.add_jacks(
+            panel,
+            self.horizontal_spacing(
+                self.v_center + self.io_pitch * 2, 4, self.io_pitch
+            ),
+        )
+        panel = self.add_jacks(
+            panel,
+            self.horizontal_spacing(self.v_center + self.io_pitch, 4, self.io_pitch),
+        )
+        panel = self.add_jacks(
+            panel, self.horizontal_spacing(self.v_center, 4, self.io_pitch)
+        )
+        panel = self.add_jacks(
+            panel,
+            self.horizontal_spacing(
+                self.v_center - self.io_pitch * 2, 4, self.io_pitch
+            ),
+        )
+        panel = self.add_jacks(
+            panel,
+            self.horizontal_spacing(self.v_center - self.io_pitch, 4, self.io_pitch),
+        )
         return panel

@@ -166,7 +166,7 @@ class Panel(Part):
             "showAxes": True,
             "projectionDir": (0, 0, 1),
         }
-        
+
     def calc_width(self):
         match self.hp:
             case PanelSize.HP_1:

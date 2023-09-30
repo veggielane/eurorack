@@ -1,4 +1,4 @@
-from eurorack.glowlab import Joystick, Power, TrafficLight
+from eurorack.glowlab import Joystick, Matrix, Power, TrafficLight
 from eurorack.panels import Panel, PanelSize
 from typing import List
 import cadquery as cq
@@ -23,7 +23,8 @@ def output(components: List[Component]):
 def build(components: List[Component]):
     return dict(zip(components, map(lambda comp: comp.build().val(), components)))
 
-parts = [Power(), TrafficLight(), Joystick()]
+
+parts = [Power(), TrafficLight(), Joystick(), Matrix()]
 
 
 output(parts)
