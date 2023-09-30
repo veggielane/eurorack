@@ -8,8 +8,8 @@ io_output_height = 18
 io_pitch = 15
 
 io_jack_dia = 6.4
-# TODO double check arcade dia
-led_arcade_dia = 30
+
+led_arcade_dia = 28
 
 
 class GlowLabPanel(Part):
