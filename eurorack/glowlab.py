@@ -86,3 +86,17 @@ class TrafficLight(GlowLabPanel):
             [(7.5, io_input_height), (panel_width(self.hp) - 7.5, io_input_height)],
         )
         return panel
+
+
+class Joystick(GlowLabPanel):
+    def __init__(self):
+        super().__init__(hp=PanelSize.HP_12, number=f"JOYSTICK", name=f'JOYSTICK PANEL"')
+
+    def build(self):
+        panel = panel_geometry(self.hp)
+        panel = self.add_io(panel, 4, 4)
+
+        # Add SparkFun Switch COM-11310
+        panel = panel.pushPoints([(self.h_center, self.v_center)]).hole(22)
+        panel = panel.pushPoints([(self.h_center, self.v_center + 16),(self.h_center + 16, self.v_center),(self.h_center, self.v_center - 16),(self.h_center - 16, self.v_center)]).hole(4)
+        return panel

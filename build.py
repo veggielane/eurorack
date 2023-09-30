@@ -1,4 +1,4 @@
-from eurorack.glowlab import Power, TrafficLight
+from eurorack.glowlab import Joystick, Power, TrafficLight
 from eurorack.panels import Panel, PanelSize
 from typing import List
 import cadquery as cq
@@ -42,7 +42,7 @@ parts = [
     Panel(PanelSize.HP_42),
 ]
 
-parts = [Power(), TrafficLight()]
+parts = [Power(), TrafficLight(), Joystick()]
 
 
 output(parts)
