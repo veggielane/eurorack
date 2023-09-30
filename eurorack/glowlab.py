@@ -8,6 +8,7 @@ io_output_height = 18
 io_pitch = 15
 
 io_jack_dia = 6.4
+led_dia = 6.2
 
 led_arcade_dia = 28
 
@@ -31,6 +32,9 @@ class GlowLabPanel(Part):
                 )
         return points
 
+    def add_leds(self, geo, points):
+        return geo.pushPoints(points).hole(led_dia)
+
     def add_jacks(self, geo, points):
         return geo.pushPoints(points).hole(io_jack_dia)
 
@@ -39,6 +43,18 @@ class GlowLabPanel(Part):
         points.extend(self.horizontal_spacing(io_input_height, inputs, io_pitch))
         points.extend(self.horizontal_spacing(io_output_height, outputs, io_pitch))
         return self.add_jacks(geo, points)
+        
+    def render_options(self):
+        return {
+            "width": panel_width(self.hp)*2.0,
+            "height": 300,
+            "marginLeft": 5,
+            "marginTop": 5,
+            "showAxes": True,
+            "projectionDir": (0, 0, 1),
+        }
+        
+
 
 
 class Power(GlowLabPanel):
@@ -99,4 +115,5 @@ class Joystick(GlowLabPanel):
         # Add SparkFun Switch COM-11310
         panel = panel.pushPoints([(self.h_center, self.v_center)]).hole(22)
         panel = panel.pushPoints([(self.h_center, self.v_center + 16),(self.h_center + 16, self.v_center),(self.h_center, self.v_center - 16),(self.h_center - 16, self.v_center)]).hole(4)
+        panel = self.add_leds(panel, self.horizontal_spacing(io_output_height + io_pitch, 4, io_pitch))
         return panel

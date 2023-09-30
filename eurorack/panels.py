@@ -149,9 +149,59 @@ def hp_size(self):
 class Panel(Part):
     def __init__(self, hp: PanelSize):
         self.hp = hp
+
         super(Part, self).__init__(
             number=f"EURO-{hp.value}HP-PANEL", name=f'EURORACK PANEL {hp.value}HP"'
         )
 
     def build(self):
         return panel_geometry(self.hp)
+
+    def render_options(self):
+        return {
+            "width": self.calc_width(),
+            "height": 230,
+            "marginLeft": 0,
+            "marginTop": 0,
+            "showAxes": True,
+            "projectionDir": (0, 0, 1),
+        }
+        
+    def calc_width(self):
+        match self.hp:
+            case PanelSize.HP_1:
+                return 300
+            case PanelSize.HP_1_5:
+                return 300
+            case PanelSize.HP_2:
+                return 300
+            case PanelSize.HP_3:
+                return 300
+            case PanelSize.HP_4:
+                return 300
+            case PanelSize.HP_6:
+                return 53
+            case PanelSize.HP_8:
+                return 300
+            case PanelSize.HP_10:
+                return 300
+            case PanelSize.HP_12:
+                return 300
+            case PanelSize.HP_14:
+                return 300
+            case PanelSize.HP_16:
+                return 300
+            case PanelSize.HP_18:
+                return 300
+            case PanelSize.HP_20:
+                return 300
+            case PanelSize.HP_21:
+                return 300
+            case PanelSize.HP_22:
+                return 300
+            case PanelSize.HP_28:
+                return 300
+            case PanelSize.HP_42:
+                return 300
+            case _:
+                print("Error")
