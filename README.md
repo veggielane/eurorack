@@ -5,7 +5,8 @@
 ![Image](https://veggielane.github.io/eurorack/ENGR-GLOWLAB-TRAFFIC.svg)
 ![Image](https://veggielane.github.io/eurorack/ENGR-GLOWLAB-JOYSTICK.svg)
 ![Image](https://veggielane.github.io/eurorack/ENGR-GLOWLAB-MATRIX.svg)
-
-
+![Image](https://veggielane.github.io/eurorack/ENGR-GLOWLAB-LOGIC-AND.svg)
+![Image](https://veggielane.github.io/eurorack/ENGR-GLOWLAB-LOGIC-OR.svg)
+![Image](https://veggielane.github.io/eurorack/ENGR-GLOWLAB-LOGIC-TWO-WAY.svg)
 
 https://nightly.link/veggielane/eurorack/workflows/build-on-push/main/outputs.zip

@@ -5,6 +5,7 @@ from eurorack.part import Part
 io_jack_dia = 6.4
 led_dia = 6.4
 led_arcade_dia = 28
+switch_toggle = 6.4
 
 
 class GlowLabPanel(Part):
@@ -37,6 +38,9 @@ class GlowLabPanel(Part):
 
     def add_jacks(self, geo, points):
         return geo.pushPoints(points).hole(io_jack_dia)
+
+    def add_toggle(self, geo, points):
+        return geo.pushPoints(points).hole(switch_toggle)
 
     def add_io(self, geo, inputs, outputs):
         points = []
@@ -163,5 +167,71 @@ class Matrix(GlowLabPanel):
         panel = self.add_jacks(
             panel,
             self.horizontal_spacing(self.v_center - self.io_pitch, 4, self.io_pitch),
+        )
+        return panel
+
+
+class AndLogic(GlowLabPanel):
+    def __init__(self):
+        super().__init__(
+            hp=PanelSize.HP_6, number=f"LOGIC-AND", name=f'LOGIC AND PANEL"'
+        )
+
+    def build(self):
+        panel = panel_geometry(self.hp)
+        panel = self.add_io(panel, 2, 2)
+        panel = self.add_toggle(
+            panel, self.horizontal_spacing(self.v_center, 2, self.io_pitch)
+        )
+        panel = self.add_leds(
+            panel,
+            self.horizontal_spacing(
+                self.v_center - self.io_pitch * 2, 1, self.io_pitch
+            ),
+        )
+        return panel
+
+
+class OrLogic(GlowLabPanel):
+    def __init__(self):
+        super().__init__(hp=PanelSize.HP_6, number=f"LOGIC-OR", name=f'LOGIC OR PANEL"')
+
+    def build(self):
+        panel = panel_geometry(self.hp)
+        panel = self.add_io(panel, 2, 2)
+        panel = self.add_toggle(
+            panel, self.horizontal_spacing(self.v_center, 2, self.io_pitch)
+        )
+        panel = self.add_leds(
+            panel,
+            self.horizontal_spacing(
+                self.v_center - self.io_pitch * 2, 1, self.io_pitch
+            ),
+        )
+        return panel
+
+
+class TwoWayLogic(GlowLabPanel):
+    def __init__(self):
+        super().__init__(
+            hp=PanelSize.HP_6, number=f"LOGIC-TWO-WAY", name=f'LOGIC TWO WAY PANEL"'
+        )
+
+    def build(self):
+        panel = panel_geometry(self.hp)
+        panel = self.add_io(panel, 2, 2)
+        panel = self.add_toggle(
+            panel,
+            self.horizontal_spacing(self.v_center + self.io_pitch, 1, self.io_pitch),
+        )
+        panel = self.add_toggle(
+            panel,
+            self.horizontal_spacing(self.v_center - self.io_pitch, 1, self.io_pitch),
+        )
+        panel = self.add_leds(
+            panel,
+            self.horizontal_spacing(
+                self.v_center - self.io_pitch * 2, 1, self.io_pitch
+            ),
         )
         return panel
