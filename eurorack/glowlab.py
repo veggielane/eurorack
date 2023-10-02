@@ -137,9 +137,11 @@ class Joystick(GlowLabPanel):
         return panel
 
 
-class Matrix(GlowLabPanel):
+class Matrix12(GlowLabPanel):
     def __init__(self):
-        super().__init__(hp=PanelSize.HP_12, number=f"MATRIX", name=f'MATRIX PANEL"')
+        super().__init__(
+            hp=PanelSize.HP_12, number=f"MATRIX12", name=f'MATRIX12 PANEL"'
+        )
 
     def build(self):
         panel = panel_geometry(self.hp)
@@ -233,5 +235,73 @@ class TwoWayLogic(GlowLabPanel):
             self.horizontal_spacing(
                 self.v_center - self.io_pitch * 2, 1, self.io_pitch
             ),
+        )
+        return panel
+
+
+class Matrix6(GlowLabPanel):
+    def __init__(self):
+        super().__init__(hp=PanelSize.HP_6, number=f"MATRIX6", name=f'MATRIX6 PANEL"')
+
+    def build(self):
+        panel = panel_geometry(self.hp)
+        panel = self.add_io(panel, 2, 2)
+
+        panel = self.add_jacks(
+            panel,
+            self.horizontal_spacing(
+                self.v_center + self.io_pitch * 2, 2, self.io_pitch
+            ),
+        )
+        panel = self.add_jacks(
+            panel,
+            self.horizontal_spacing(self.v_center + self.io_pitch, 2, self.io_pitch),
+        )
+        panel = self.add_jacks(
+            panel, self.horizontal_spacing(self.v_center, 2, self.io_pitch)
+        )
+        panel = self.add_jacks(
+            panel,
+            self.horizontal_spacing(
+                self.v_center - self.io_pitch * 2, 2, self.io_pitch
+            ),
+        )
+        panel = self.add_jacks(
+            panel,
+            self.horizontal_spacing(self.v_center - self.io_pitch, 2, self.io_pitch),
+        )
+        return panel
+
+
+class Matrix3(GlowLabPanel):
+    def __init__(self):
+        super().__init__(hp=PanelSize.HP_3, number=f"MATRIX3", name=f'MATRIX3 PANEL"')
+
+    def build(self):
+        panel = panel_geometry(self.hp)
+        panel = self.add_io(panel, 1, 1)
+
+        panel = self.add_jacks(
+            panel,
+            self.horizontal_spacing(
+                self.v_center + self.io_pitch * 2, 1, self.io_pitch
+            ),
+        )
+        panel = self.add_jacks(
+            panel,
+            self.horizontal_spacing(self.v_center + self.io_pitch, 1, self.io_pitch),
+        )
+        panel = self.add_jacks(
+            panel, self.horizontal_spacing(self.v_center, 1, self.io_pitch)
+        )
+        panel = self.add_jacks(
+            panel,
+            self.horizontal_spacing(
+                self.v_center - self.io_pitch * 2, 1, self.io_pitch
+            ),
+        )
+        panel = self.add_jacks(
+            panel,
+            self.horizontal_spacing(self.v_center - self.io_pitch, 1, self.io_pitch),
         )
         return panel
